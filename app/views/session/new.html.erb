@@ -1,0 +1,17 @@
+<h1>Sign In</h1>
+
+<%= form_with url: sign_in_path do |form| %>
+    <div class="mb-3">
+        <%= form.label :email, style: "display: block", class:"form-label fw-semibold" %>
+        <%=form.email_field :email, class:"form-control", placeholder:"john@doe.com"%>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :password, style: "display: block", class:"form-label fw-semibold" %>
+        <%=form.password_field :password, class:"form-control", placeholder:"Enter your password"%>
+    </div>
+
+    <div class="mb-3">
+        <%=form.submit "Sign In", class:"btn btn-dark"%>
+    </div>
+<% end %>
