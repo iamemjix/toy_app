@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root "home#index"
+  
   get "sign_up", to: "registration#new_user"
   post "sign_up", to: "registration#create"
+
+  get "sign_in", to: "session#new_user"
+  post "sign_in", to: "session#create"
+
+  delete "logout", to: "session#destroy"
 
 end
