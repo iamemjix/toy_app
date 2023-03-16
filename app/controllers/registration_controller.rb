@@ -20,7 +20,7 @@ class RegistrationController < ApplicationController
     end
 
     private
-
+    
     #raise an error if the user is not found. only permitting user to get ff info.
     def user_params
         params.require(:user).permit(:email, :password, :password_confirmation) 
