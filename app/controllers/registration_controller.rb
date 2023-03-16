@@ -10,7 +10,7 @@ class RegistrationController < ApplicationController
     
             if @user.save
                 #Login using session cookies
-                # session[:user_id] = @user.id
+                session[:user_id] = @user.id
                 #Redirection once account created.
                 format.html { redirect_to root_path, notice: "Account created successfully!"}
             else 
