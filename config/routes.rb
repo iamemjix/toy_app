@@ -19,4 +19,11 @@ Rails.application.routes.draw do
   get "create_toy", to:"toy#new"
   post "create_toy", to:"toy#create"
 
+  get "edit_toy/:id", to:"toy#edit", as: "edit_toy"
+  patch "edit_toy/:id", to: "toy#update", as: "update_toy"
+
+  get "toy_list", to:"toy#list"
+
+  delete "toy_delete/:id", to: "toy#destroy", as: "toy_delete"
+
 end

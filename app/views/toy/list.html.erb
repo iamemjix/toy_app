@@ -1,0 +1,40 @@
+<h1>Toy List</h1>
+
+<% if @toy.present? %>
+    <div class="d-flex flex-row flex-wrap">
+        <% @toy.each do |toy| %>
+            <div class="card m-3" style="width: 18rem;">
+                <img src=<%= toy.img %> class="card-img-top" alt="...">
+
+                <div class="card-body pb-5" style="position: relative" > 
+                    <h5 class="card-title"><%= toy.name %></h5>
+                    <p class="card-text"><%= toy.description %></p>
+                    <div class="align-self-end d-flex flex-row" style="position: absolute; bottom: .5rem ">
+                        <%
+=begin%>
+ <%= link_to "Show", toy, class: "btn btn-dark ms-1"%> 
+<%
+=end%>
+                        
+                        <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary" %>
+                        <%= link_to "Destroy ", toy_delete_path(toy.id), data: {"turbo-method": :delete}, class: "btn btn-danger ms-1"%>
+
+                        <%
+=begin%>
+ <%= button_to "Destroy ", toy, method: :delete, class:"btn btn-danger ms-1"%>                      
+<%
+=end%>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+<% end %>
+
+
+<%
+=begin%>
+ <%= link_to "", new_toy_app_path, class:"btn btn-outline-primary"%> 
+<%
+=end%>

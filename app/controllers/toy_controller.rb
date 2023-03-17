@@ -26,19 +26,46 @@ class ToyController < ApplicationController
     end
 
     def edit
+        @toy = Toy.find_by(id: params[:id])    
     end
 
     def update
+        @toy = Toy.find_by(id: params[:id])
+        if params[:toy][:img].present?
+            Cloudinary::Uploader.destroy(@toy.img_id)
+            upload_response = Cloudinary::Uploader.upload(params[:toy][:img])
+            params[:toy][:img] = upload_response["secure_url"]
+            params[:toy][:img_id] = upload_response["public_id"]
+        end 
+
+        respond_to do |format|
+            if @toy.update(toy_params)
+                format.html { redirect_to toy_list_path, notice:"Toy updated successfully." }
+            else
+                format.html { render "toy/edit", status: :unprocessable_entity }
+            end
+        end
     end
 
+    def 
+
+
     def destroy
+        @toy = Toy.find_by(id: params[:id])
+        @toy.destroy
+
+        respond_to do |format|
+            format.html { redirect_to toy_list_path, notice: "Toy app was successfully destroyed." }
+        end
     end
 
     def list
+        @toy = Toy.all
     end
 
     private
     def toy_params
         params.require(:toy).permit(:name, :category, :img, :img_id, :description, :user_id) #lagay img id tyaka user id
     end
+
 end
