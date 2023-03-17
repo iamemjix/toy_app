@@ -1,0 +1,26 @@
+<div class="p-5 mb-4 bg-dark rounded-3 text-bg-dark">
+  <div class="card m-3 center mx-auto" style= "width: 30rem;">
+    <img src=<%= @toy.img %> class="card-img-top" alt="...">
+  </div>
+  
+  <h2> 
+    <%= @toy.name %>
+  </h2>
+
+  <p class="lead"><em>
+    <%= Current.user.email%> |
+    <%= @toy.category%> <em>
+  </p> 
+
+  <hr class="my-4">
+  <p class="text-break"> <em>
+    <%= @toy.description%> </em>
+  </p>
+  <br/>
+
+  <div>
+    <%= link_to "Back", toy_list_path, class:"btn btn-outline-light"%>
+    <%= link_to "Edit", update_toy_path(@toy), class:"btn btn-outline-secondary"%>  
+  </div>
+
+</div>

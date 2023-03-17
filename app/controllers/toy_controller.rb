@@ -6,6 +6,18 @@ class ToyController < ApplicationController
         @toy = Toy.new
     end
 
+    def edit
+        @toy = Toy.find_by(id: params[:id])    
+    end
+
+    def view
+        @toy = Toy.find_by(id: params[:id])
+    end
+
+    def list
+        @toy = Toy.all
+    end
+
     def create
         #checking if toy image is present in params
         if params[:toy][:img].present?
@@ -23,10 +35,6 @@ class ToyController < ApplicationController
                 format.html { render "toy/new", status: :unprocessable_entity }
             end
         end
-    end
-
-    def edit
-        @toy = Toy.find_by(id: params[:id])    
     end
 
     def update
@@ -47,9 +55,6 @@ class ToyController < ApplicationController
         end
     end
 
-    def 
-
-
     def destroy
         @toy = Toy.find_by(id: params[:id])
         @toy.destroy
@@ -57,10 +62,6 @@ class ToyController < ApplicationController
         respond_to do |format|
             format.html { redirect_to toy_list_path, notice: "Toy app was successfully destroyed." }
         end
-    end
-
-    def list
-        @toy = Toy.all
     end
 
     private

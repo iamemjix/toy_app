@@ -8,22 +8,11 @@
 
                 <div class="card-body pb-5" style="position: relative" > 
                     <h5 class="card-title"><%= toy.name %></h5>
-                    <p class="card-text"><%= toy.description %></p>
+                    <p class="card-text"><i><%= toy.category %></i> | <%= toy.description %></p>
                     <div class="align-self-end d-flex flex-row" style="position: absolute; bottom: .5rem ">
-                        <%
-=begin%>
- <%= link_to "Show", toy, class: "btn btn-dark ms-1"%> 
-<%
-=end%>
-                        
-                        <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary" %>
+                        <%= link_to "Show", toy_view_path(toy.id), class: "btn btn-dark ms-1"%> 
+                        <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary ms-1" %>
                         <%= link_to "Destroy ", toy_delete_path(toy.id), data: {"turbo-method": :delete}, class: "btn btn-danger ms-1"%>
-
-                        <%
-=begin%>
- <%= button_to "Destroy ", toy, method: :delete, class:"btn btn-danger ms-1"%>                      
-<%
-=end%>
                     </div>
                 </div>
             </div>
