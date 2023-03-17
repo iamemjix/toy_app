@@ -1,5 +1,5 @@
 <br/>
-<h1>New toy app</h1>
+<h1>Create toy</h1>
 <br/>
 
 <%= form_with model: @toy, url:create_toy_path do |form| %>
@@ -15,6 +15,11 @@
 
     <form>
         <div class="mb-3">
+            <%= form.label :img, style: "display: block", class:"form-label fw-semibold" %>
+            <%= form.file_field :img, class:"form-control", placeholder:"Insert image"%>
+        </div>
+        
+        <div class="mb-3">
             <%= form.label :name, style: "display: block", class:"form-label fw-semibold" %>
             <%= form.text_field :name, class:"form-control", placeholder:"Lego"%>
         </div>
@@ -29,10 +34,7 @@
             <%= form.text_field :description, class:"form-control", placeholder:"Lorem ipsum dolor sit amet" %>
         </div>
 
-        <div class="mb-3">
-            <%= form.label :img, style: "display: block", class:"form-label fw-semibold" %>
-            <%= form.text_field :img, class:"form-control", placeholder:"Insert image"%>
-        </div>
+        <%= form.hidden_field :user_id, value: Current.user.id %>
 
         <br/>
         <div class="d-flex flex-row">
