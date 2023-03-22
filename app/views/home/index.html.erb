@@ -5,7 +5,9 @@
   <h1> Welcome to my toy app! </h1> <br/>
 
   <p class="lead"><em>
-    Mary Grace D. Verzon
+    <% if Current.user.present?%>
+      <%= Current.user.email %>
+    <% end %>
   </p> 
 
   <hr class="my-4">

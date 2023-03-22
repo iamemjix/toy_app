@@ -18,6 +18,10 @@ class ToyController < ApplicationController
         @toy = Toy.all
     end
 
+    def current_list
+        @toy = Toy.where(user_id: Current.user.id)
+    end
+
     def create
         #checking if toy image is present in params
         if params[:toy][:img].present?
@@ -30,7 +34,7 @@ class ToyController < ApplicationController
             @toy = Toy.new(toy_params)
 
             if @toy.save
-                format.html { redirect_to root_path, notice:"Toy created successfully." }
+                format.html { redirect_to toy_list_path, notice:"Toy created successfully." }
             else
                 format.html { render "toy/new", status: :unprocessable_entity }
             end

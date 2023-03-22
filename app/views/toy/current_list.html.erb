@@ -1,4 +1,4 @@
-<h1>Toy List</h1>
+<h1><%= Current.user.email%> toy list</h1>
 
 <% if @toy.present? %>
     <div class="d-flex flex-row flex-wrap">
@@ -10,21 +10,15 @@
                     <h5 class="card-title"><%= toy.name %></h5>
                     <p class="card-text"><i><%= toy.category %></i> | <%= toy.description %></p>
                     <div class="align-self-end d-flex flex-row" style="position: absolute; bottom: .5rem ">
-                        <%= link_to "Show", toy_view_path(toy.id), class: "btn btn-dark ms-1"%>
-
-                        <% if toy.user_id == Current.user.id  %>  
-                            <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary ms-1" %>
-                            <%= link_to "Delete ", toy_delete_path(toy.id), data: {"turbo-method": :delete}, class: "btn btn-danger ms-1"%>
-                        <% end %> 
-
+                        <%= link_to "Show", toy_view_path(toy.id), class: "btn btn-dark ms-1"%> 
+                        <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary ms-1" %>
+                        <%= link_to "Destroy ", toy_delete_path(toy.id), data: {"turbo-method": :delete}, class: "btn btn-danger ms-1"%>
                     </div>
                 </div>
             </div>
         <% end %>
     </div>
-
 <% end %>
-
 
 <%
 =begin%>

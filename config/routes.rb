@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   patch "edit_toy/:id", to: "toy#update", as: "update_toy"
 
   get "toy_list", to:"toy#list"
+  get "toy_current_list", to:"toy#current_list"
+
   get "toy_view/:id", to:"toy#view", as: "toy_view"
 
   delete "toy_delete/:id", to: "toy#destroy", as: "toy_delete"
