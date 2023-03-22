@@ -16,6 +16,14 @@ class ToyController < ApplicationController
 
     def list
         @toy = Toy.all
+        @image = Hash.new
+
+        #getting img depends on toy id
+        if @toy.empty? == false
+            @toy.each do |toy|
+                @image[toy.id] = Image.where(toy_id: toy.id)
+            end
+        end
     end
 
     def current_list
@@ -23,20 +31,30 @@ class ToyController < ApplicationController
     end
 
     def create
+        @toy = Current.user.toys.new(toy_params.except(:image))
+
         #checking if toy image is present in params
-        if params[:toy][:img].present?
-            upload_response = Cloudinary::Uploader.upload(params[:toy][:img])
-            params[:toy][:img] = upload_response["secure_url"]
-            params[:toy][:img_id] = upload_response["public_id"]
-        end   
+        if params[:toy].has_key?(:image) && params[:toy][:image][:img].empty? == false
+            image_params = []
+
+            params[:toy][:image][:img].each do |image|
+                upload_response = Cloudinary::Uploader.upload(image)
+
+                image_hash = {img: upload_response["secure_url"], img_id: upload_response["public_id"]}
+                image_params.push(image_hash)
+            end
+
+            image_params.each do |img|
+                @image = @toy.images.new(img)
+                @image.save
+            end
+        end
 
         respond_to do |format|
-            @toy = Toy.new(toy_params)
-
             if @toy.save
-                format.html { redirect_to toy_list_path, notice:"Toy created successfully." }
+                format.html { redirect_to root_path, notice: "Toy created successfully." }
             else
-                format.html { render "toy/new", status: :unprocessable_entity }
+                format.html { redirect_to create_toy_path, status: :unprocessable_entity, notice: "Error occured. Please retry."}
             end
         end
     end
@@ -70,7 +88,7 @@ class ToyController < ApplicationController
 
     private
     def toy_params
-        params.require(:toy).permit(:name, :category, :img, :img_id, :description, :user_id) #lagay img id tyaka user id
+        params.require(:toy).permit(:name, :category, :description, :user_id)
     end
 
 end
