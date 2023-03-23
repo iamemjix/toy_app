@@ -10,6 +10,9 @@
                             <% if index == 0 %>
                                 <div class="carousel-item active">
                                     <img src="<%= image.img %>" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class= "text-dark fs-6 fw-semibold lh-1 text-uppercase"><%= toy.name %></h5>
+                                    </div>
                                 </div>
                             <% else %>
                                 <div class="carousel-item">
