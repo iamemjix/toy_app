@@ -13,6 +13,8 @@ class ToyController < ApplicationController
 
     def view
         @toy = Toy.find_by(id: params[:id])
+        @user = User.find_by(id: @toy.user_id)
+        @image = Image.where(toy_id: @toy.id)
     end
 
     def list
