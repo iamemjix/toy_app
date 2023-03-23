@@ -13,33 +13,33 @@
         </div>
     <%end%> 
 
-    <form>
+    <%= form.fields_for :image do |image| %>
         <div class="mb-3">
-            <%= form.label :img, style: "display: block", class:"form-label fw-semibold" %>
-            <%= form.file_field :img, class:"form-control", placeholder:"Insert image"%>
+            <%= image.label :img, style: "display: block", class:"form-label fw-semibold"%>
+            <%= image.file_field :img, include_hidden: false, multiple: true, class:"form-control", placeholder:"Insert image", required: true%>
         </div>
-        
-        <div class="mb-3">
-            <%= form.label :name, style: "display: block", class:"form-label fw-semibold" %>
-            <%= form.text_field :name, class:"form-control", placeholder:"Lego"%>
-        </div>
+    <% end %>
+    
+    <div class="mb-3">
+        <%= form.label :name, style: "display: block", class:"form-label fw-semibold" %>
+        <%= form.text_field :name, class:"form-control", placeholder:"Enter name of toy", required: true%>
+    </div>
 
-        <div class="mb-3">
-            <%= form.label :category, style: "display: block", class:"form-label fw-semibold" %>
-            <%= form.text_field :category, class:"form-control", placeholder:"Dolls, Electronic toys, Action figures..."%>
-        </div>
+    <div class="mb-3">
+        <%= form.label :category, style: "display: block", class:"form-label fw-semibold" %>
+        <%= form.text_field :category, class:"form-control", placeholder:"Enter toy category", required: true%>
+    </div>
 
-        <div class="mb-3">
-            <%= form.label :description, style: "display: block", class:"form-label fw-semibold" %>
-            <%= form.text_field :description, class:"form-control", placeholder:"Lorem ipsum dolor sit amet" %>
-        </div>
+    <div class="mb-3">
+        <%= form.label :description, style: "display: block", class:"form-label fw-semibold" %>
+        <%= form.text_field :description, class:"form-control", placeholder:"Enter brief description of toy", required: true%>
+    </div>
 
-        <%= form.hidden_field :user_id, value: Current.user.id %>
+    <%= form.hidden_field :user_id, value: Current.user.id %>
 
-        <br/>
-        <div class="d-flex flex-row">
-            <%= form.submit "Edit", class:"btn btn-secondary me-2"%>
-            <%= link_to "Cancel", root_path, class:"btn btn-dark"%>
-        </div>
-    </form>
+    <br/>
+    <div class="d-flex flex-row">
+        <%= form.submit "Edit", class:"btn btn-secondary me-2"%>
+        <%= link_to "Cancel", root_path, class:"btn btn-dark"%>
+    </div>
 <% end %>
