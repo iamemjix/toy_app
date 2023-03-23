@@ -5,12 +5,16 @@
   <h1> Welcome to my toy app! </h1> <br/>
 
   <p class="lead"><em>
-    Mary Grace D. Verzon
+    <% if Current.user.present?%>
+      <%= Current.user.email %>
+    <% end %>
   </p> 
 
   <hr class="my-4">
   
   <div class="d-flex flex-row">
+    <%= link_to "Create", create_toy_path, class: "btn btn-outline-secondary ms-1"%>
+    <%= link_to "Toy list", toy_list_path, class:"btn btn-outline-light ms-1"%>
   </div>
 </div>
 

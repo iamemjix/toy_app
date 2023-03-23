@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
-    def index 
+    def index
+        @cssFile = "home/index"
     end
 end
