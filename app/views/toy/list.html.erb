@@ -1,0 +1,52 @@
+<h1>Toy List</h1>
+
+<% if @toy.present? %>
+    <div class="d-flex flex-row flex-wrap">
+        <% @toy.each do |toy| %>
+            <div class="card m-3" style="width: 18rem;">
+                <div id="carouselExample-<%= toy.id %>" class="carousel slide">
+                    <div class="carousel-inner">
+                        <% @image[toy.id].each_with_index do |image, index| %>
+                            <% if index == 0 %>
+                                <div class="carousel-item active">
+                                    <img src="<%= image.img %>" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class= "text-dark fs-6 fw-semibold lh-1 text-uppercase"><%= toy.name %></h5>
+                                    </div>
+                                </div>
+                            <% else %>
+                                <div class="carousel-item">
+                                    <img src="<%= image.img %>" class="d-block w-100" alt="...">
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample-<%= toy.id %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample-<%= toy.id %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <div class="card-body pb-5" style="position: relative" > 
+                    <h5 class="card-title"><%= toy.name %></h5>
+                    <p class="card-text"><i><%= toy.category %></i> | <%= toy.description %></p>
+                    <div class="align-self-end d-flex flex-row" style="position: absolute; bottom: .5rem ">
+                        <%= link_to "Show", toy_view_path(toy.id), class: "btn btn-dark ms-1"%>
+
+                        <% if toy.user_id == Current.user.id  %>  
+                            <%= link_to "Edit", update_toy_path(toy), class: "btn btn-secondary ms-1" %>
+                            <%= link_to "Delete ", toy_delete_path(toy.id), data: {"turbo-method": :delete}, class: "btn btn-danger ms-1"%>
+                        <% end %> 
+
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+<% end %>
