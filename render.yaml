@@ -1,6 +1,7 @@
 databases:
   - name: postgres
     ipAllowList: []
+    plan: free
 
 services:
   - type: web
@@ -8,6 +9,7 @@ services:
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: bundle exec rails s
+    plan: free
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
