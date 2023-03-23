@@ -107,10 +107,11 @@ class ToyController < ApplicationController
 
     def destroy
         @toy = Toy.find_by(id: params[:id])
+        Image.where(toy_id: @toy.id).destroy_all
         @toy.destroy
 
         respond_to do |format|
-            format.html { redirect_to toy_list_path, notice: "Toy app was successfully destroyed." }
+            format.html { redirect_to toy_list_path, notice: "Toy app was successfully deleted." }
         end
     end
 

@@ -15,7 +15,7 @@
 
     <%= form.fields_for :image do |image| %>
         <div class="mb-3">
-            <%= image.label :img, style: "display: block", class:"form-label fw-semibold"%>
+            <%= image.label :img, "Image", style: "display: block", class:"form-label fw-semibold"%>
             <%= image.file_field :img, include_hidden: false, multiple: true, class:"form-control", placeholder:"Insert image", required: true%>
         </div>
     <% end %>
