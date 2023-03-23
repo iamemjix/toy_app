@@ -28,6 +28,16 @@ class ToyController < ApplicationController
 
     def current_list
         @toy = Toy.where(user_id: Current.user.id)
+
+        @image = Hash.new
+
+        #getting img depends on toy id
+        if @toy.empty? == false
+            @toy.each do |toy|
+                @image[toy.id] = Image.where(toy_id: toy.id)
+            end
+        end
+
     end
 
     def create
